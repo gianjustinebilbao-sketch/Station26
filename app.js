@@ -12,26 +12,25 @@ const multer = require('multer');
 const dayjs = require('dayjs');
 const helmet = require('helmet');
 
-
-
-
 const app = express();
 const PORT = process.env.PORT || 1000;
 process.env.TZ = "Asia/Manila";
 
 // Database Connection to!
-mongoose.connect(process.env.MONGO_URI)
+mongoose.connect(process.env.MONGODB)
   .then(() => console.log('✅ Audres25 DB Access Granted'))
   .catch(err => console.error('❌ Audres25 DB Access Denied, Why? :', err));
 
-// Setup ng Session
 const store = new MongoDBStore({
   uri: process.env.MONGO_URI,
   collection: 'sessions'
 });
-
 store.on('error', (error) => {
-  console.error('Naku, Session store error:', error);
+  console.error('❌ Session store connection failed:', error.message);
+  // Don't let this crash the app
+});
+store.on('connected', () => {
+  console.log('✅ Session store connected successfully');
 });
 
 // Mga Middleware
@@ -51,9 +50,9 @@ app.use(session({
   secret: process.env.SESSION_SECRET || 'ferry2025',
   resave: false,
   saveUninitialized: false,
-  store: store,
+  // Remove store: store, - this will use default memory store
   cookie: { 
-    maxAge: 1000 * 60 * 60 * 24 // para matic isang araw lang
+    maxAge: 1000 * 60 * 60 * 24
   }
 }));
 

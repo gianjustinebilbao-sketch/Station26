@@ -1,16 +1,23 @@
 {
   "name": "station26",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev" : "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gianjustinebilbao-sketch/Station26.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/gianjustinebilbao-sketch/Station26/issues"
+  },
+  "homepage": "https://github.com/gianjustinebilbao-sketch/Station26#readme",
+  "description": "",
   "dependencies": {
     "cloudinary": "^1.41.3",
     "connect-flash": "^0.1.1",
